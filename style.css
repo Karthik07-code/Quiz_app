@@ -151,7 +151,7 @@ body.dark-mode .toggle-btn {
 
 @media (max-width: 500px) {
   .toggle-btn {
-    padding: 5px 8px;
-    font-size: 12px;
+    padding: 10px 18px;
+    font-size: 18px;
   }
 }
