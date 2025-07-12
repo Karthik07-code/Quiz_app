@@ -1,0 +1,157 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BASE STYLES */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
+  color: #222;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+/* GLASS CONTAINER */
+.container {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* HEADINGS */
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #111;
+  transition: color 0.3s ease;
+}
+body.dark-mode h1 {
+  color: #00eaff;
+}
+
+h3 {
+  font-size: 1.3rem;
+  margin: 20px 0;
+  color: #333;
+  transition: color 0.3s ease;
+}
+body.dark-mode h3 {
+  color: #eee;
+}
+
+/* RESULT */
+#res {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  height: 30px;
+}
+
+/* BUTTONS */
+.btn {
+  background: #005a9c;
+  color: #ffffff;
+  border: none;
+  padding: 12px 25px;
+  margin: 10px 8px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.btn:hover {
+  background: #004477;
+  transform: scale(1.05);
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+body.dark-mode .btn {
+  background: #00eaff;
+  color: #0f2027;
+}
+body.dark-mode .btn:hover {
+  background: #00c3cc;
+}
+
+/* NEXT & RESTART BUTTONS */
+#next-btn,
+#restart-btn {
+  display: none;
+}
+
+/* DARK MODE BACKGROUND */
+body.dark-mode {
+  background: linear-gradient(135deg, #000428, #004e92);
+  color: #f5f5f5;
+}
+
+/* DARK MODE CONTAINER */
+body.dark-mode .container {
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+}
+
+/* TOGGLE BUTTON (Top Right Corner) */
+.toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: #fff;
+  border: none;
+  padding: 10px 18px;
+  font-weight: bold;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+body.dark-mode .toggle-btn {
+  background: #111;
+  color: #fff;
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 20px;
+    margin: 40px 10px;
+  }
+  h1 {
+    font-size: 26px;
+  }
+  #question {
+    font-size: 18px;
+  }
+  .btn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .toggle-btn {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+}

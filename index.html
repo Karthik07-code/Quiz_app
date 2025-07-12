@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button id="dark-mode-toggle" class="toggle-btn">🌙 Dark Mode</button>
+    <audio
+      id="toggle-sound"
+      src="https://cdn.pixabay.com/audio/2023/03/28/audio_f5d22d3898.mp3"
+    ></audio>
+
+    <div class="container">
+      <h1>Mini Quiz</h1>
+
+      <h3 id="question"></h3>
+      <button class="btn" id="btn-1"></button>
+      <button class="btn" id="btn-2"></button>
+
+      <div id="res"></div>
+      <button class="btn" id="next-btn">Next</button>
+      <button id="restart-btn" class="btn">Restart Quiz</button>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
