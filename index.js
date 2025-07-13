@@ -93,13 +93,13 @@ function handleclick(event) {
   // Show result
   if (selected === correct) {
     result.textContent = "Correct ✅";
-    result.style.color = "green";
-    event.target.style.backgroundColor = "green";
+    result.style.color = "#111;";
+    event.target.style.backgroundColor = "#17ff02ff";
     score++;
   } else {
     result.textContent = "Wrong ❌";
-    result.style.color = "red";
-    event.target.style.backgroundColor = "red";
+    result.style.color = "#111;";
+    event.target.style.backgroundColor = "#ff0000ff";
   }
 
   // Show the next button

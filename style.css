@@ -31,8 +31,7 @@ body.dark-mode ::selection {
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #8e2de2, #4a00e0);
-  color: hsl(0, 0%, 13%);
-
+  color: hsl(0, 0%, 10%);
   position: relative;
 }
 
