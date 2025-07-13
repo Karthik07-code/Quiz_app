@@ -1,69 +1,66 @@
-// 🔽 QUIZ DATA – Our questions, options, and answers (can be extended)
 const quizdata = [
-
   {
-    question: "Which CSS property controls the text size?",
-    options: ["font-style", "text-size", "font-size", "text-style"],
-    answer: "font-size",
+    question: "Which HTML5 element is used to define navigation links?",
+    options: ["<nav>", "<menu>", "<header>", "<links>"],
+    answer: "<nav>",
   },
   {
-    question: "What does DOM stand for?",
+    question: "What is the default position value in CSS?",
+    options: ["absolute", "fixed", "relative", "static"],
+    answer: "static",
+  },
+  {
+    question: "Which JavaScript method is used to filter an array?",
+    options: ["map()", "filter()", "reduce()", "sort()"],
+    answer: "filter()",
+  },
+  {
+    question: "Which tag is used to embed JavaScript code in an HTML file?",
+    options: ["<style>", "<script>", "<code>", "<js>"],
+    answer: "<script>",
+  },
+  {
+    question: "In React, what hook is used to manage component state?",
+    options: ["useRef", "useEffect", "useState", "useMemo"],
+    answer: "useState",
+  },
+  {
+    question: "What is the purpose of the `z-index` property in CSS?",
     options: [
-      "Document Object Model",
-      "Data Object Management",
-      "Digital Ordinance Model",
-      "Desktop Oriented Mode",
+      "To zoom in on an element",
+      "To set the transparency",
+      "To control stacking order",
+      "To change font size",
     ],
-    answer: "Document Object Model",
+    answer: "To control stacking order",
   },
   {
-    question: "Which tag is used to create a hyperlink in HTML?",
-    options: ["<link>", "<a>", "<href>", "<hyper>"],
-    answer: "<a>",
+    question: "Which JavaScript keyword is used to create a constant variable?",
+    options: ["let", "var", "const", "define"],
+    answer: "const",
   },
   {
-    question: "What does CSS stand for?",
+    question: "What will `typeof NaN` return in JavaScript?",
+    options: ["undefined", "object", "number", "NaN"],
+    answer: "number",
+  },
+  {
+    question: "What does the 'this' keyword refer to in a JavaScript method?",
     options: [
-      "Creative Style Sheets",
-      "Cascading Style Sheets",
-      "Colorful Style Sheets",
-      "Computer Style Sheets",
+      "The global object",
+      "The DOM element",
+      "The object that owns the method",
+      "The window object",
     ],
-    answer: "Cascading Style Sheets",
+    answer: "The object that owns the method",
   },
   {
-    question: "Which JavaScript method is used to select an element by ID?",
-    options: [
-      "getElementById()",
-      "querySelectorAll()",
-      "getElementsByClass()",
-      "selectById()",
-    ],
-    answer: "getElementById()",
-  },
-  {
-    question: "Which HTML tag is used for inserting an image?",
-    options: ["<img>", "<image>", "<pic>", "<src>"],
-    answer: "<img>",
-  },
-  {
-    question: "In JavaScript, which keyword is used to declare a variable?",
-    options: ["v", "let", "varies", "int"],
-    answer: "let",
-  },
-  {
-    question: "Which CSS property is used to change the background color?",
-    options: ["color", "bgcolor", "background-color", "background"],
-    answer: "background-color",
-  },
-  {
-    question: "What does React use to manage UI rendering efficiently?",
-    options: ["Shadow DOM", "Virtual DOM", "Inline DOM", "JSON DOM"],
-    answer: "Virtual DOM",
+    question: "Which CSS unit is relative to the root element?",
+    options: ["em", "px", "rem", "%"],
+    answer: "rem",
   },
 ];
 
-// 🔽 DOM ELEMENTS – Getting HTML elements to interact with them in JS
 const opt1 = document.getElementById("btn-1");
 const opt2 = document.getElementById("btn-2");
 const opt3 = document.getElementById("btn-3");
@@ -73,18 +70,19 @@ const result = document.getElementById("res");
 const nextBtn = document.getElementById("next-btn");
 const restartBtn = document.getElementById("restart-btn");
 const optionsContainer = document.getElementById("options-container");
+const feedback = document.getElementById("feedback");
 
-// 🔽 TRACKING CURRENT QUESTION – Starts at index 0 (first question)
 let currentQuestionIndex = 0;
-
-// To track score for correct answers
 let score = 0;
 
-// 🔽  Main Functional Logic – handle answer click
 function handleclick(event) {
-  const selected = event.target.textContent;
+  const selected = event.target.textContent
+    .trim()
+    .split(")")
+    .slice(1)
+    .join(")")
+    .trim();
   const correct = quizdata[currentQuestionIndex].answer;
-
   opt1.disabled = true;
   opt2.disabled = true;
   opt3.disabled = true;
@@ -92,34 +90,29 @@ function handleclick(event) {
 
   // Show result
   if (selected === correct) {
-    result.textContent = "Correct ✅";
-    result.style.color = "#111;";
+    // result.textContent = "Correct ✅";
+    // result.style.color = "#111;";
     event.target.style.backgroundColor = "#17ff02ff";
     score++;
   } else {
-    result.textContent = "Wrong ❌";
-    result.style.color = "#111;";
+    // result.textContent = "Wrong ❌";
+    // result.style.color = "#111;";
     event.target.style.backgroundColor = "#ff0000ff";
   }
-
-  // Show the next button
   nextBtn.style.display = "inline-block";
 }
-
-// 🔽 ADD CLICK EVENTS TO BOTH OPTION BUTTONS
 opt1.addEventListener("click", handleclick);
 opt2.addEventListener("click", handleclick);
 opt3.addEventListener("click", handleclick);
 opt4.addEventListener("click", handleclick);
 
-// 🔽 LOADS A QUESTION AND PREPARES THE UI
 function loadQuestion() {
   const currentData = quizdata[currentQuestionIndex];
-  que.textContent = currentData.question;
-  opt1.textContent = currentData.options[0];
-  opt2.textContent = currentData.options[1];
-  opt3.textContent = currentData.options[2];
-  opt4.textContent = currentData.options[3];
+  que.textContent = `${currentQuestionIndex + 1}. ${currentData.question}`;
+  opt1.textContent = `A) ${currentData.options[0]}`;
+  opt2.textContent = `B) ${currentData.options[1]}`;
+  opt3.textContent = `C) ${currentData.options[2]}`;
+  opt4.textContent = `D) ${currentData.options[3]}`;
 
   opt1.disabled = false;
   opt2.disabled = false;
@@ -136,16 +129,45 @@ function loadQuestion() {
   nextBtn.style.display = "none";
 }
 
-// 🔽 NEXT BUTTON CLICK – Loads next question or finishes quiz
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+if (currentQuestionIndex < quizdata.length) {
+  shuffleArray(quizdata);
+  loadQuestion(); //Initial load
+}
+
 nextBtn.addEventListener("click", () => {
   currentQuestionIndex++;
 
   if (currentQuestionIndex < quizdata.length) {
     loadQuestion(); // Load next question
   } else {
-    que.textContent = "Quiz Completed! 🎉";
-    result.textContent = `Total score ${score}/${quizdata.length}`;
-    result.style.color = "black";
+    que.textContent = "Quiz Completed!";
+    result.textContent = `Total score : ${score}/${quizdata.length}`;
+
+    // Show feedback
+    const percentage = (score / quizdata.length) * 100;
+
+    if (percentage >= 80) {
+      launchConfetti(2000, 80, 6);
+      feedback.textContent = "🔥 Excellent work! You're a pro!";
+      feedback.className = "feedback success";
+    } else if (percentage >= 60) {
+      launchConfetti(1000, 50, 3);
+      feedback.textContent = "👍 Good job! Keep practicing.";
+      feedback.className = "feedback average";
+    } else {
+      feedback.textContent = "📘 Keep learning! You’ll improve!";
+      feedback.className = "feedback low";
+    }
+
+    feedback.style.display = "block";
+
     nextBtn.style.display = "none";
     opt1.style.display = "none";
     opt2.style.display = "none";
@@ -155,15 +177,11 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
-// 🔽 INITIAL LOAD – Load the first question when app starts
-if (currentQuestionIndex < quizdata.length) {
-  loadQuestion();
-}
-
 // Restart
 restartBtn.addEventListener("click", () => {
   currentQuestionIndex = 0;
   score = 0;
+  shuffleArray(quizdata);
 
   opt1.style.display = "inline-block";
   opt2.style.display = "inline-block";
@@ -171,10 +189,10 @@ restartBtn.addEventListener("click", () => {
   opt4.style.display = "inline-block";
 
   restartBtn.style.display = "none";
+  feedback.style.display = "none"; // Hide feedback
   loadQuestion();
 });
 
-// Dark Mode
 const toggleBtn = document.getElementById("dark-mode-toggle");
 const toggleSound = document.getElementById("toggle-sound");
 
@@ -186,10 +204,32 @@ toggleBtn.addEventListener("click", () => {
 
   const isDark = document.body.classList.contains("dark-mode");
 
-  // Change icon/text based on screen size
   if (window.innerWidth <= 500) {
     toggleBtn.innerHTML = isDark ? "☀️" : "🌙";
   } else {
     toggleBtn.innerHTML = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
   }
 });
+
+function launchConfetti(duration = 2000, spread = 60, particleCount = 5) {
+  const end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount,
+      angle: 60,
+      spread,
+      origin: { x: 0 },
+    });
+    confetti({
+      particleCount,
+      angle: 120,
+      spread,
+      origin: { x: 1 },
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
+}

@@ -1,3 +1,4 @@
+/* RESET AND BASE */
 * {
   margin: 0;
   padding: 0;
@@ -11,11 +12,11 @@ button:active {
 }
 
 button {
-  -webkit-tap-highlight-color: transparent; /* Remove blue box on mobile tap */
+  -webkit-tap-highlight-color: transparent;
 }
 
 button:focus-visible {
-  outline: 2px solid #00eaff; /* a nice custom focus for keyboard users */
+  outline: 2px solid #00eaff;
 }
 
 ::selection {
@@ -27,6 +28,7 @@ body.dark-mode ::selection {
   background-color: #00c3cc;
   color: black;
 }
+
 /* BASE STYLES */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -43,6 +45,7 @@ body {
   flex-direction: column;
   padding: 20px;
   transition: all 0.4s ease;
+  gap: 30px;
 }
 
 /* GLASS CONTAINER */
@@ -52,8 +55,9 @@ body {
   padding: 30px 40px;
   border-radius: 16px;
   box-shadow: 0 18px 32px rgba(31, 38, 135, 0.6);
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
+  height: 430px;
   text-align: center;
   transition: all 0.3s ease;
 }
@@ -61,30 +65,41 @@ body {
 /* HEADINGS */
 h1 {
   font-size: 2.2rem;
-  margin-bottom: 20px;
   color: #111;
   transition: color 0.3s ease;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 body.dark-mode h1 {
   color: #00eaff;
+  text-shadow: none;
 }
 
 h3 {
-  font-size: 1.3rem;
-  margin: 20px 0;
-  color: #333;
+  font-size: 1.8rem;
+  margin: 40px 0px;
+  color: #222;
   transition: color 0.3s ease;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 body.dark-mode h3 {
   color: #eee;
+  text-shadow: none;
 }
 
 /* RESULT */
 #res {
-  margin-top: 20px;
-  font-size: 1.2rem;
   font-weight: bold;
-  height: 30px;
+  font-size: 1.4rem;
+  color: #eee;
+}
+
+/* BUTTON CONTAINER */
+.btn-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 61fr));
+  gap: 15px;
+  justify-content: center;
+  margin: 30px 0;
 }
 
 /* BUTTONS */
@@ -92,19 +107,31 @@ body.dark-mode h3 {
   background: #005a9c;
   color: #ffffff;
   border: none;
-  padding: 12px 25px;
-  margin: 10px 8px;
+  font-size: 15px;
+  padding: 14px 20px;
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   border-radius: 8px;
-  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
+
+.btn::before {
+  content: attr(data-label);
+  font-weight: bold;
+  margin-right: 12px;
+}
+
 .btn:hover {
   background: #004477;
   transform: scale(1.05);
 }
+
 .btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -117,10 +144,54 @@ body.dark-mode .btn {
 body.dark-mode .btn:hover {
   background: #00c3cc;
 }
+body.dark-mode #next-btn,
+body.dark-mode #restart-btn {
+  background: #00eaff;
+  color: #0f2027;
+}
+body.dark-mode #next-btn:hover,
+body.dark-mode #restart-btn:hover {
+  background: #00c3cc;
+}
+body.dark-mode #next-btn:active,
+body.dark-mode #restart-btn:active {
+  background: hsl(183, 100%, 60%);
+}
 
 /* NEXT & RESTART BUTTONS */
 #next-btn,
 #restart-btn {
+  display: none;
+  background: hsl(260, 97%, 45%);
+  color: #ffffff;
+  border: none;
+  font-size: 15px;
+  padding: 14px 20px;
+  width: 130px;
+  min-height: 55px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+#restart-btn {
+  margin-top: 25px;
+}
+
+#next-btn:hover,
+#restart-btn:hover {
+  background-color: hsl(260, 97%, 35%);
+}
+
+#next-btn:active,
+#restart-btn:active {
+  background-color: hsl(260, 97%, 50%);
+}
+
+#feedback {
   display: none;
 }
 
@@ -136,7 +207,7 @@ body.dark-mode .container {
   box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
 }
 
-/* TOGGLE BUTTON (Top Right Corner) */
+/* TOGGLE BUTTON */
 .toggle-btn {
   position: absolute;
   top: 20px;
@@ -171,7 +242,7 @@ body.dark-mode .toggle-btn {
   }
   .btn {
     font-size: 14px;
-    padding: 10px 20px;
+    padding: 12px 18px;
   }
 }
 
@@ -180,4 +251,56 @@ body.dark-mode .toggle-btn {
     padding: 10px 18px;
     font-size: 18px;
   }
+}
+
+#feedback {
+  display: none;
+  max-width: 370px;
+  margin: 20px auto 0;
+  margin-bottom: 20px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+}
+
+/* Feedback Styles */
+.feedback.success {
+  background-color: #d4ffdc;
+  color: #1b5e20;
+  border: 2px solid #17ff02;
+}
+
+.feedback.average {
+  background-color: #fff6d1;
+  color: #8a6d00;
+  border: 2px solid #ffc107;
+}
+
+.feedback.low {
+  background-color: #ffe0e0;
+  color: #9e1c1c;
+  border: 2px solid #ff4c4c;
+}
+
+/* Dark Mode Feedback */
+body.dark-mode .feedback.success {
+  background-color: #113c1e;
+  color: #b6ffbb;
+  border-color: #17ff02;
+}
+
+body.dark-mode .feedback.average {
+  background-color: #3f3a1c;
+  color: #ffe97f;
+  border-color: #ffc107;
+}
+
+body.dark-mode .feedback.low {
+  background-color: #3a1c1c;
+  color: #ffc7c7;
+  border-color: #ff4c4c;
 }
