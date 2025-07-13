@@ -37,6 +37,7 @@ body {
   animation: gradientFlow 15s ease infinite;
   color: hsl(0, 0%, 10%);
   position: relative;
+  overflow: hidden;
 }
 
 body.dark-mode {
@@ -44,6 +45,7 @@ body.dark-mode {
   background-size: 600% 600%;
   animation: gradientFlow 15s ease infinite;
   color: #f5f5f5;
+  overflow: hidden;
 }
 
 @keyframes gradientFlow {
@@ -69,6 +71,19 @@ body.dark-mode {
   gap: 30px;
 }
 
+/* PARTICLES BACKGROUND */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity: 0.3;
+  z-index: 0;
+}
+
 /* GLASS CONTAINER */
 .container {
   background: rgba(255, 255, 255, 0.2);
@@ -81,6 +96,8 @@ body.dark-mode {
   min-height: 480px;
   text-align: center;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 /* HEADINGS */
@@ -138,8 +155,18 @@ body.dark-mode h3 {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   position: relative;
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 123, 255, 1);
+  }
 }
 
 .btn::before {
@@ -161,22 +188,10 @@ body.dark-mode h3 {
 body.dark-mode .btn {
   background: #00eaff;
   color: #0f2027;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
 }
 body.dark-mode .btn:hover {
   background: #00c3cc;
-}
-body.dark-mode #next-btn,
-body.dark-mode #restart-btn {
-  background: #00eaff;
-  color: #0f2027;
-}
-body.dark-mode #next-btn:hover,
-body.dark-mode #restart-btn:hover {
-  background: #00c3cc;
-}
-body.dark-mode #next-btn:active,
-body.dark-mode #restart-btn:active {
-  background: hsl(183, 100%, 60%);
 }
 
 /* NEXT & RESTART BUTTONS */
@@ -194,9 +209,11 @@ body.dark-mode #restart-btn:active {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 15px rgba(204, 0, 255, 0.6);
+  animation: glow 2s ease-in-out infinite alternate;
   text-align: center;
 }
+
 
 #next-btn {
   margin-bottom: 10px;

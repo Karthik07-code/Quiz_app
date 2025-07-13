@@ -71,7 +71,8 @@ const nextBtn = document.getElementById("next-btn");
 const restartBtn = document.getElementById("restart-btn");
 const optionsContainer = document.getElementById("options-container");
 const feedback = document.getElementById("feedback");
-const timeDisplay = document.getElementById("time"); // ✅ ADDED: for timer display
+const timeDisplay = document.getElementById("time");
+const crtSound = document.getElementById("correct-sound");
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -96,6 +97,8 @@ function handleclick(event) {
   if (selected === correct) {
     event.target.style.backgroundColor = "#17ff02ff";
     score++;
+    crtSound.currentTime = 0;
+    crtSound.play();
   } else {
     event.target.style.backgroundColor = "#ff0000ff";
   }
