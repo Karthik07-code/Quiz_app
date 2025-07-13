@@ -1,9 +1,23 @@
-/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+button:focus,
+button:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent; /* Remove blue box on mobile tap */
+}
+
+button:focus-visible {
+  outline: 2px solid #00eaff; /* a nice custom focus for keyboard users */
+}
+
 ::selection {
   background-color: #8e2de2;
   color: hsl(0, 0%, 90%);
@@ -167,14 +181,4 @@ body.dark-mode .toggle-btn {
     padding: 10px 18px;
     font-size: 18px;
   }
-}
-
-button:focus {
-  outline: none;
-}
-
-button:focus,
-button:active {
-  outline: none !important;
-  box-shadow: none !important;
 }
