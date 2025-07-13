@@ -71,11 +71,16 @@ const nextBtn = document.getElementById("next-btn");
 const restartBtn = document.getElementById("restart-btn");
 const optionsContainer = document.getElementById("options-container");
 const feedback = document.getElementById("feedback");
+const timeDisplay = document.getElementById("time"); // ✅ ADDED: for timer display
 
 let currentQuestionIndex = 0;
 let score = 0;
+let time = 30; // ✅ ADDED: seconds per question
+let timerInterval; // ✅ ADDED: timer reference
 
 function handleclick(event) {
+  clearInterval(timerInterval); // ✅ ADDED: stop timer on answer
+
   const selected = event.target.textContent
     .trim()
     .split(")")
@@ -88,19 +93,15 @@ function handleclick(event) {
   opt3.disabled = true;
   opt4.disabled = true;
 
-  // Show result
   if (selected === correct) {
-    // result.textContent = "Correct ✅";
-    // result.style.color = "#111;";
     event.target.style.backgroundColor = "#17ff02ff";
     score++;
   } else {
-    // result.textContent = "Wrong ❌";
-    // result.style.color = "#111;";
     event.target.style.backgroundColor = "#ff0000ff";
   }
   nextBtn.style.display = "inline-block";
 }
+
 opt1.addEventListener("click", handleclick);
 opt2.addEventListener("click", handleclick);
 opt3.addEventListener("click", handleclick);
@@ -127,6 +128,31 @@ function loadQuestion() {
   result.textContent = "";
   result.style.color = "";
   nextBtn.style.display = "none";
+
+  // ✅ ADDED: Reset and start timer
+  clearInterval(timerInterval);
+  time = 30;
+  timeDisplay.textContent = time;
+  timerInterval = setInterval(() => {
+    time--;
+    timeDisplay.textContent = time;
+    if (time === 0) {
+      clearInterval(timerInterval);
+      disableOptions();
+      result.textContent = "⏰ Time's up!";
+      result.style.color = "white";
+      result.style.marginBottom = "15px";
+      nextBtn.style.display = "inline-block";
+    }
+  }, 1000);
+}
+
+function disableOptions() {
+  // ✅ ADDED
+  opt1.disabled = true;
+  opt2.disabled = true;
+  opt3.disabled = true;
+  opt4.disabled = true;
 }
 
 function shuffleArray(array) {
@@ -138,21 +164,21 @@ function shuffleArray(array) {
 
 if (currentQuestionIndex < quizdata.length) {
   shuffleArray(quizdata);
-  loadQuestion(); //Initial load
+  loadQuestion();
 }
 
 nextBtn.addEventListener("click", () => {
+  clearInterval(timerInterval); // ✅ ADDED: clear timer on next
   currentQuestionIndex++;
 
   if (currentQuestionIndex < quizdata.length) {
-    loadQuestion(); // Load next question
+    loadQuestion();
   } else {
     que.textContent = "Quiz Completed!";
     result.textContent = `Total score : ${score}/${quizdata.length}`;
+    clearInterval(timerInterval); // ✅ ADDED: stop timer on complete
 
-    // Show feedback
     const percentage = (score / quizdata.length) * 100;
-
     if (percentage >= 80) {
       launchConfetti(2000, 80, 6);
       feedback.textContent = "🔥 Excellent work! You're a pro!";
@@ -177,8 +203,8 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
-// Restart
 restartBtn.addEventListener("click", () => {
+  clearInterval(timerInterval); // ✅ ADDED: stop old timer
   currentQuestionIndex = 0;
   score = 0;
   shuffleArray(quizdata);
@@ -189,7 +215,7 @@ restartBtn.addEventListener("click", () => {
   opt4.style.display = "inline-block";
 
   restartBtn.style.display = "none";
-  feedback.style.display = "none"; // Hide feedback
+  feedback.style.display = "none";
   loadQuestion();
 });
 
@@ -203,7 +229,6 @@ toggleBtn.addEventListener("click", () => {
   toggleSound.play();
 
   const isDark = document.body.classList.contains("dark-mode");
-
   if (window.innerWidth <= 500) {
     toggleBtn.innerHTML = isDark ? "☀️" : "🌙";
   } else {
@@ -213,23 +238,9 @@ toggleBtn.addEventListener("click", () => {
 
 function launchConfetti(duration = 2000, spread = 60, particleCount = 5) {
   const end = Date.now() + duration;
-
   (function frame() {
-    confetti({
-      particleCount,
-      angle: 60,
-      spread,
-      origin: { x: 0 },
-    });
-    confetti({
-      particleCount,
-      angle: 120,
-      spread,
-      origin: { x: 1 },
-    });
-
-    if (Date.now() < end) {
-      requestAnimationFrame(frame);
-    }
+    confetti({ particleCount, angle: 60, spread, origin: { x: 0 } });
+    confetti({ particleCount, angle: 120, spread, origin: { x: 1 } });
+    if (Date.now() < end) requestAnimationFrame(frame);
   })();
 }
