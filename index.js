@@ -180,15 +180,15 @@ nextBtn.addEventListener("click", () => {
 
     const percentage = (score / quizdata.length) * 100;
     if (percentage >= 80) {
-      launchConfetti(2000, 80, 6);
+      launchConfetti(2500, 80, 6);
       feedback.textContent = "🔥 Excellent work! You're a pro!";
       feedback.className = "feedback success";
     } else if (percentage >= 60) {
-      launchConfetti(1000, 50, 3);
+      launchConfetti(1500, 50, 3);
       feedback.textContent = "👍 Good job! Keep practicing.";
       feedback.className = "feedback average";
     } else {
-      feedback.textContent = "📘 Keep learning! You’ll improve!";
+      feedback.textContent = "📘 Keep learning! You'll improve!";
       feedback.className = "feedback low";
     }
 
