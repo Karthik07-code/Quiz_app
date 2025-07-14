@@ -79,7 +79,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('https://www.transparenttextures.com/patterns/stardust.png');
+  background: url("https://www.transparenttextures.com/patterns/stardust.png");
   opacity: 0.3;
   z-index: 0;
 }
@@ -185,12 +185,14 @@ body.dark-mode h3 {
   cursor: not-allowed;
 }
 
-body.dark-mode .btn {
+body.dark-mode #next-btn,
+body.dark-mode #restart-btn {
   background: #00eaff;
   color: #0f2027;
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
 }
-body.dark-mode .btn:hover {
+body.dark-mode #next-btn:hover,
+body.dark-mode #restart-btn:hover {
   background: #00c3cc;
 }
 
@@ -213,7 +215,6 @@ body.dark-mode .btn:hover {
   animation: glow 2s ease-in-out infinite alternate;
   text-align: center;
 }
-
 
 #next-btn {
   margin-bottom: 10px;

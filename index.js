@@ -76,11 +76,11 @@ const crtSound = document.getElementById("correct-sound");
 
 let currentQuestionIndex = 0;
 let score = 0;
-let time = 30; // ✅ ADDED: seconds per question
-let timerInterval; // ✅ ADDED: timer reference
+let time = 30;
+let timerInterval;
 
 function handleclick(event) {
-  clearInterval(timerInterval); // ✅ ADDED: stop timer on answer
+  clearInterval(timerInterval);
 
   const selected = event.target.textContent
     .trim()
@@ -132,7 +132,6 @@ function loadQuestion() {
   result.style.color = "";
   nextBtn.style.display = "none";
 
-  // ✅ ADDED: Reset and start timer
   clearInterval(timerInterval);
   time = 30;
   timeDisplay.textContent = time;
@@ -151,7 +150,6 @@ function loadQuestion() {
 }
 
 function disableOptions() {
-  // ✅ ADDED
   opt1.disabled = true;
   opt2.disabled = true;
   opt3.disabled = true;
@@ -171,7 +169,7 @@ if (currentQuestionIndex < quizdata.length) {
 }
 
 nextBtn.addEventListener("click", () => {
-  clearInterval(timerInterval); // ✅ ADDED: clear timer on next
+  clearInterval(timerInterval);
   currentQuestionIndex++;
 
   if (currentQuestionIndex < quizdata.length) {
@@ -179,8 +177,9 @@ nextBtn.addEventListener("click", () => {
   } else {
     que.textContent = "Quiz Completed!";
     result.textContent = `Total score : ${score}/${quizdata.length}`;
-    clearInterval(timerInterval); // ✅ ADDED: stop timer on complete
+    document.getElementById("timer").style.display = "none";
 
+    clearInterval(timerInterval);
     const percentage = (score / quizdata.length) * 100;
     if (percentage >= 80) {
       launchConfetti(2500, 80, 6);
@@ -207,7 +206,7 @@ nextBtn.addEventListener("click", () => {
 });
 
 restartBtn.addEventListener("click", () => {
-  clearInterval(timerInterval); // ✅ ADDED: stop old timer
+  clearInterval(timerInterval);
   currentQuestionIndex = 0;
   score = 0;
   shuffleArray(quizdata);
